@@ -1,25 +1,18 @@
+export const runtime = 'nodejs';
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { addYears } from "@/utils/date";
 
 export async function GET() {
-  const data = await prisma.asn.findMany({
-    orderBy: { updatedAt: "desc" }
-  });
+  const data = await prisma.asn.findMany({ orderBy: { updatedAt: "desc" } });
   return NextResponse.json(data);
 }
 
 export async function POST(req: Request) {
   const body = await req.json();
-
   const {
-    nama,
-    nomorPegawai,
-    tmtPns,
-    riwayatTmtKgb,
-    riwayatTmtPangkat,
-    jadwalKgbBerikutnya,
-    jadwalPangkatBerikutnya
+    nama, nomorPegawai, tmtPns, riwayatTmtKgb, riwayatTmtPangkat,
+    jadwalKgbBerikutnya, jadwalPangkatBerikutnya
   } = body ?? {};
 
   if (!nama || !nomorPegawai) {

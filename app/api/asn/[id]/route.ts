@@ -1,3 +1,4 @@
+export const runtime = 'nodejs';
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { addYears } from "@/utils/date";
@@ -14,15 +15,9 @@ export async function GET(_: Request, ctx: Ctx) {
 export async function PUT(req: Request, ctx: Ctx) {
   const id = Number(ctx.params.id);
   const body = await req.json();
-
   const {
-    nama,
-    nomorPegawai,
-    tmtPns,
-    riwayatTmtKgb,
-    riwayatTmtPangkat,
-    jadwalKgbBerikutnya,
-    jadwalPangkatBerikutnya
+    nama, nomorPegawai, tmtPns, riwayatTmtKgb, riwayatTmtPangkat,
+    jadwalKgbBerikutnya, jadwalPangkatBerikutnya
   } = body ?? {};
 
   const computedKgb = jadwalKgbBerikutnya ?? addYears(riwayatTmtKgb, 2);

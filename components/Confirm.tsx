@@ -1,8 +1,6 @@
 "use client";
 export default function Confirm({
-  message,
-  onConfirm,
-  onCancel
+  message, onConfirm, onCancel
 }: { message: string; onConfirm: () => void; onCancel: () => void }) {
   return (
     <div className="space-y-4">

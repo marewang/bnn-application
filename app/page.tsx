@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useMemo, useState } from "react";
 import Modal from "@/components/Modal";
 import Confirm from "@/components/Confirm";
@@ -78,12 +77,8 @@ export default function Home() {
             </tr>
           </thead>
           <tbody className="divide-y">
-            {loading && (
-              <tr><td className="p-4 text-center" colSpan={8}>Memuat data...</td></tr>
-            )}
-            {!loading && filtered.length === 0 && (
-              <tr><td className="p-4 text-center" colSpan={8}>Belum ada data</td></tr>
-            )}
+            {loading && (<tr><td className="p-4 text-center" colSpan={8}>Memuat data...</td></tr>)}
+            {!loading && filtered.length === 0 && (<tr><td className="p-4 text-center" colSpan={8}>Belum ada data</td></tr>)}
             {filtered.map((row) => (
               <tr key={row.id} className="hover:bg-gray-50">
                 <Td>{row.nama}</Td>
@@ -95,14 +90,10 @@ export default function Home() {
                 <Td className="font-medium">{toISODateInput(row.jadwalPangkatBerikutnya)}</Td>
                 <Td>
                   <div className="flex gap-2">
-                    <button
-                      onClick={() => startEdit(row)}
-                      className="rounded-lg border px-3 py-1 text-sm hover:bg-gray-50">
+                    <button onClick={() => startEdit(row)} className="rounded-lg border px-3 py-1 text-sm hover:bg-gray-50">
                       Edit
                     </button>
-                    <button
-                      onClick={() => setConfirmId(row.id!)}
-                      className="rounded-lg bg-red-600 px-3 py-1 text-sm text-white hover:bg-red-700">
+                    <button onClick={() => setConfirmId(row.id!)} className="rounded-lg bg-red-600 px-3 py-1 text-sm text-white hover:bg-red-700">
                       Hapus
                     </button>
                   </div>
@@ -114,10 +105,7 @@ export default function Home() {
       </div>
 
       <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? "Edit ASN" : "Tambah ASN"}>
-        <AsnForm
-          initial={editing ?? undefined}
-          onDone={() => { setModalOpen(false); load(); }}
-        />
+        <AsnForm initial={editing ?? undefined} onDone={() => { setModalOpen(false); load(); }} />
       </Modal>
 
       <Modal open={confirmId !== null} onClose={() => setConfirmId(null)} title="Konfirmasi Hapus">

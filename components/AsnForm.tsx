@@ -13,10 +13,7 @@ export type Asn = {
   jadwalPangkatBerikutnya?: string | null;
 };
 
-export default function AsnForm({
-  initial,
-  onDone
-}: { initial?: Partial<Asn>; onDone?: () => void }) {
+export default function AsnForm({ initial, onDone }:{ initial?: Partial<Asn>; onDone?: () => void }) {
   const [form, setForm] = useState<Asn>({
     id: initial?.id,
     nama: initial?.nama ?? "",
@@ -29,7 +26,6 @@ export default function AsnForm({
   });
 
   useEffect(() => {
-    // Auto-compute schedules when riwayat fields change (2 yrs KGB, 4 yrs Pangkat)
     if (form.riwayatTmtKgb && !initial?.jadwalKgbBerikutnya) {
       const d = addYears(form.riwayatTmtKgb, 2);
       setForm((f) => ({ ...f, jadwalKgbBerikutnya: toISODateInput(d ?? undefined) }));

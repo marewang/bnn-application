@@ -1,12 +1,8 @@
 "use client";
 import { ReactNode, useEffect } from "react";
 
-export default function Modal({
-  open,
-  onClose,
-  children,
-  title
-}: { open: boolean; onClose: () => void; children: ReactNode; title: string }) {
+export default function Modal({ open, onClose, children, title }:
+  { open: boolean; onClose: () => void; children: ReactNode; title: string }) {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     document.addEventListener("keydown", handleEsc);
